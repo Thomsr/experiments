@@ -8,9 +8,9 @@ import type { MenuValue, Screen } from './types/navigation.js';
 export const App = () => {
   const { exit } = useApp();
   const [screen, setScreen] = useState<Screen>('menu');
-  const [dataset, setDataset] = useState('data/binary/appendicitis_bin.csv');
+  const [dataset, setDataset] = useState('appendicitis_0.2_0.csv');
 
-  const title = useMemo(() => `Dataset: ${dataset}`, [dataset]);
+  const title = useMemo(() => `Sampled dataset: ${dataset}`, [dataset]);
 
   const handleMenuSelect = (value: MenuValue) => {
     if (value === 'quit') {
@@ -22,7 +22,7 @@ export const App = () => {
   };
 
   if (screen === 'run') {
-    return <RunView onBack={() => setScreen('menu')} />;
+    return <RunView dataset={dataset} onBack={() => setScreen('menu')} />;
   }
 
   if (screen === 'config') {

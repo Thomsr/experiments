@@ -7,7 +7,7 @@ type HeaderProps = {
 
 export const Header = ({ title }: HeaderProps) => {
   return (
-    <Box flexDirection="column" marginBottom={1}>
+    <Box flexDirection="column">
       <Text color="gray">{title}</Text>
     </Box>
   );

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Newline, Text } from 'ink';
 import SelectInput from 'ink-select-input';
-import TextInput from 'ink-text-input';
 import { datasets } from '../constants/datasets.js';
 import { Frame } from '../components/layout/frame.js';
 import { Header } from '../components/layout/header.js';
-import { useBackKey } from '../hooks/use-back-key.js';
+
+type ConfigActionValue = { type: 'dataset'; value: string } | { type: 'back' };
 
 type ConfigViewProps = {
   dataset: string;
@@ -18,35 +18,30 @@ export const ConfigView = ({
   onDatasetChange,
   onBack,
 }: ConfigViewProps) => {
-  const [typed, setTyped] = useState(dataset);
-
-  useBackKey(onBack);
-
-  useEffect(() => {
-    setTyped(dataset);
-  }, [dataset]);
+  const items: Array<{ label: string; value: ConfigActionValue }> = [
+    ...datasets.map((name) => ({
+      label: `${name}${name === dataset ? ' (current)' : ''}`,
+      value: { type: 'dataset', value: name } as ConfigActionValue,
+    })),
+    { label: 'Back', value: { type: 'back' } },
+  ];
 
   return (
     <Frame>
       <Header title="Dataset Configuration" />
-      <Text>Pick a preset:</Text>
+      <Text>Select sampled dataset:</Text>
       <SelectInput
-        items={datasets.map((name) => ({ label: name, value: name }))}
+        items={items}
         onSelect={(item) => {
-          onDatasetChange(item.value);
-          setTyped(item.value);
+          if (item.value.type === 'back') {
+            onBack();
+            return;
+          }
+
+          onDatasetChange(item.value.value);
         }}
       />
-      <Newline />
-      <Text>Or type custom path:</Text>
-      <TextInput
-        value={typed}
-        onChange={setTyped}
-        onSubmit={(value) => onDatasetChange(value.trim() || dataset)}
-      />
-      <Newline />
-      <Text color="green">Current dataset: {dataset}</Text>
-      <Text color="yellow">Press b to go back.</Text>
+      <Text color="yellow">Arrow keys to move, Enter to select.</Text>
     </Frame>
   );
 };

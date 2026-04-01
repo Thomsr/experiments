@@ -16,12 +16,10 @@ export const MenuView = ({ title, onSelect }: MenuViewProps) => {
     <Frame>
       <Header title={title} />
       <Text color="gray">Choose an action:</Text>
-      <Newline />
       <SelectInput
         items={menuItems}
         onSelect={(item) => onSelect(item.value)}
       />
-      <Newline />
       <Text color="gray">Arrow keys to move, Enter to select.</Text>
     </Frame>
   );
