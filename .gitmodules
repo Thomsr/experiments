@@ -1,0 +1,3 @@
+[submodule "codt"]
+	path = algorithms/codt
+	url = https://github.com/Thomsr/codt.git
