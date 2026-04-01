@@ -1,0 +1,26 @@
+{
+  "name": "experiments-tui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A polished terminal UI for experiment workflows.",
+  "scripts": {
+    "dev": "tsx src/index.tsx",
+    "start": "tsx src/index.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "ink": "^5.2.1",
+    "ink-select-input": "^6.2.0",
+    "ink-text-input": "^6.0.0",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
